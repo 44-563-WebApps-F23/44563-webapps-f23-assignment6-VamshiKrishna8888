@@ -1,53 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+ 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Author Entry</title> 
+    <title>Author Entry</title>
 </head>
 <body>
-    
-<h2>Getting input</h2>
+    <h1>Author Entry Vamshi Krishna Gunnala</h1>
+    <form id="authorForm">
+        <label for="secretAuthor">The hidden author name</label>
+        <input type="password" id="secretAuthor" value="Dickens">
 
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
-
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
-
-    <input type="button" onclick="resolveForm()" value="Get values from form">
-</form>
-
-
-<p id="result">This text will be replaced </p>
-
-<script> 
-
-function resolveForm (){
-    console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
-    
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
-    } else {
-        out.innerHTML = "Values were not confirmed"
-    }
-}
-</script>
-    <header>
-        <h1>Author Entry -Vamshi Krishna Gunnala</h1> 
-    </header>
-    <form action="/submit" method="post">
-        <label for="secret">The hidden author name:</label>
-        <input type="password" id="secret" name="secret" value="Vamshi" required><br><br>
-        <label for="guess">Guess the author:</label>
-        <input type="text" id="guess" name="guess" required><br><br>
-        <input type="button" value="Check the guess" onclick="checkAuthor()"><br><br>
-        <div id="result"></div>
+        <label for="guessAuthor">Guess the author</label>
+        <input type="text" id="guessAuthor">
+        
+        <input type="button" value="Check the guess" onclick="checkAuthor()">
     </form>
+
+    <p>Results: <span id="result">Good: 0, Oops: 0</span></p>
+
+    <script>
+        var good = 0;
+        var oops = 0;
+        function checkAuthor() {
+            var secretAuthorInput = document.getElementById("secretAuthor");
+            var guessAuthorInput = document.getElementById("guessAuthor");
+            var resultElement = document.getElementById("result");
+
+            var secretAuthor = secretAuthorInput.value;
+            var guessAuthor = guessAuthorInput.value;
+
+            if (secretAuthor === guessAuthor) {
+                good++;
+                alert("You got it right!");
+            } else {
+                oops++;
+                alert("Sorry");
+            }
+            resultElement.textContent = "Good: " + good + ", Oops: " + oops;
+        }
+        document.getElementById("authorForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+        });
+    </script>
+
 </body>
-</html>
+</html> 

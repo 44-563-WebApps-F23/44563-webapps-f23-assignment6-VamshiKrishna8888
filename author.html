@@ -5,46 +5,49 @@
     <title>Author Entry</title>
 </head>
 <body>
-    <h1>Author Entry Vamshi Krishna Gunnala</h1>
-    <form id="authorForm">
-        <label for="secretAuthor">The hidden author name</label>
-        <input type="password" id="secretAuthor" value="Dickens">
-
-        <label for="guessAuthor">Guess the author</label>
-        <input type="text" id="guessAuthor">
-        
-        <input type="button" value="Check the guess" onclick="checkAuthor()">
-    </form>
-
-    <p>Results: <span id="result">Good: 0, Oops: 0</span></p>
-
-    <script>
-        var good = 0;
-        var oops = 0;
-        function checkAuthor() {
-            var secretAuthorInput = document.getElementById("secretAuthor");
-            var guessAuthorInput = document.getElementById("guessAuthor");
-            var resultElement = document.getElementById("result");
-
-            var secretAuthor = secretAuthorInput.value;
-            var guessAuthor = guessAuthorInput.value;
-
-            if (secretAuthor === guessAuthor) {
-                good++;
-                alert("You got it right!");
-            } else {
-                oops++;
-                alert("Sorry");
+    <div class="container">
+        <h1 class="mt-4">Author Entry Vamshi Krishna Yadav Gunnala</h1>
+        <form>
+            <label for="hiddenAuthor">The hidden author name:</label>
+            <input type="password" id="hiddenAuthor" value="Vamshi">
+            <br>
+            <label for="GuessAuthor">Guess the author:</label>
+            <input type="text" id="guessAuthor">
+            <br>
+            <input type="button" value="Check the guess" onclick="checkAuthor()">
+        </form>
+        <div id="result"></div>
+        <div id="incorrectguess"></div>
+        <script>
+            let good = 0;
+            let oops = 0;
+            let incorrectGuesses = 0;
+            const maxIncorrectGuesses = 7;
+            function checkAuthor() {
+                const hiddenAuthorValue = document.getElementById('hiddenAuthor').value;
+                const guessAuthorValue = document.getElementById('guessAuthor').value;
+                if (hiddenAuthorValue === guessAuthorValue) {
+                    good++;
+                    alert("You got it right!");
+                } else {
+                    oops++;
+                    incorrectGuesses++;
+                    if (incorrectGuesses > maxIncorrectGuesses) {
+                            alert('Sorry, ran out of guesses.');
+                            checkButton.onclick = function () {
+                                alert('Sorry, ran out of guesses.');
+                            }
+                        }
+                    else{
+                    alert("Sorry");
+                    }
+                }
+                const resultElement = document.getElementById('result');
+                resultElement.innerHTML = `Good: ${good}, Oops: ${oops}`;
             }
-            resultElement.textContent = "Good: " + good + ", Oops: " + oops;
-        }
-        document.getElementById("authorForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-        });
-        
-        
-    </script>
-
+        </script>
+        </body>
+    <body>
 <div>
     <p>Please click on the image to see the next image.</p>
     <img src="geneva-illinois.jpg" id="img" width="100" height="100" onclick="selectImage()"></div>
